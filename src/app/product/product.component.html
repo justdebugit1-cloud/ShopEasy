@@ -1,0 +1,14 @@
+<section class="product-card">
+  <div class="product-image" *ngIf="product.imageUrl">
+    <img [src]="product.imageUrl" [alt]="product.name" />
+  </div>
+
+  <div class="product-info">
+    <h2>{{ product.name }}</h2>
+    <p>{{ product.description }}</p>
+    <div class="price-row">
+      <span class="price">$ {{ product.price.toFixed(2) }}</span>
+      <button type="button" (click)="addToCart(product)">Add to Cart</button>
+    </div>
+  </div>
+</section>
