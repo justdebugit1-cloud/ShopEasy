@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CartService } from '../cart.service';
+import { Product } from '../product/product.model';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,15 @@ import { CartService } from '../cart.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  constructor(private cartService: CartService) {}
+cartItems: Product[] = [];
+cart$ = this.cartService.cart$;
 
-  get cartCount(): number {
-    return this.cartService.cartItems.length;
-  }
+
+constructor(private cartService: CartService) {
+
+  this.cartService.cart$.subscribe(cart => {
+    this.cartItems = cart;
+  });
+
+}
 }
