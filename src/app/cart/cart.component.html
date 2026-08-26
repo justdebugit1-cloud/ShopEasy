@@ -1,0 +1,14 @@
+<div class="cart-container">
+  <h2>Shopping Cart</h2>
+  <div class="cart-count">
+    <p>Items in Cart: <strong>{{ cartService.cart().length }}</strong></p>
+  </div>
+  <div *ngIf="cartService.cart().length === 0" class="empty-cart">
+    <p>Your cart is empty</p>
+  </div>
+  <div *ngIf="cartService.cart().length > 0" class="cart-items">
+    <div *ngFor="let item of cartService.cart()" class="cart-item">
+      <p>{{ item.name }} - ${{ item.price }}</p>
+    </div>
+  </div>
+</div>

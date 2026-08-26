@@ -1,22 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable ,signal } from '@angular/core';
 import { Product } from './product/product.model';
-import {BehaviorSubject} from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-private cartSubject = new BehaviorSubject<Product[]>([]);
+private cartState = signal<Product[]>([]);
 
-cart$ = this.cartSubject.asObservable();
+readonly cart =this.cartState.asReadonly();
 
 addToCart(product: Product): void {
-    const currentCart = this.cartSubject.value;
-
-  this.cartSubject.next([
-    ...currentCart,
-    product
-  ]);
+  this.cartState.update((cart) => [...cart, product]); 
 
   }
 }
+ 
