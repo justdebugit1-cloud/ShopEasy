@@ -1,11 +1,17 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { provideState, provideStore } from '@ngrx/store';
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './header/header.component';
+import { ProductComponent } from './product/product.component';
+import { CartComponent } from './cart/cart.component';
+import { cartFeature } from './cart/CartStoreModule/cart.selectors';
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [RouterTestingModule],
-    declarations: [AppComponent]
+    declarations: [AppComponent, HeaderComponent, ProductComponent, CartComponent],
+    providers: [provideStore(), provideState(cartFeature)]
   }));
 
   it('should create the app', () => {

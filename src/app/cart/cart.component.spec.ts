@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideState, provideStore } from '@ngrx/store';
+import { cartFeature } from './CartStoreModule/cart.selectors';
 
 import { CartComponent } from './cart.component';
 
@@ -8,7 +10,8 @@ describe('CartComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CartComponent ]
+      declarations: [ CartComponent ],
+      providers: [provideStore(), provideState(cartFeature)]
     })
     .compileComponents();
 

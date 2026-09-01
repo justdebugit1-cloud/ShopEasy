@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideState, provideStore } from '@ngrx/store';
+import { cartFeature } from '../cart/CartStoreModule/cart.selectors';
 
 import { HeaderComponent } from './header.component';
 
@@ -8,7 +10,8 @@ describe('HeaderComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [HeaderComponent]
+      declarations: [HeaderComponent],
+      providers: [provideStore(), provideState(cartFeature)]
     });
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;

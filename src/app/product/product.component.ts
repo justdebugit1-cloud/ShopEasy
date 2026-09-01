@@ -12,12 +12,22 @@ import { CartService } from '../cart.service';
 export class ProductComponent {
   constructor(private cartService: CartService) { }
 
-  product: Product = {
-    name: 'Stylish Sneakers',
-    imageUrl: 'assets/sneaker.png',
-    description: 'Comfortable, everyday sneakers with a modern look.',
-    price: 49.99
-  };
+  products: Product[] = [
+    {
+      id: 1,
+      name: 'ProBook Laptop',
+      imageUrl: 'assets/laptop.jpg',
+      description: 'A fast, lightweight laptop for work, study, and everyday creativity.',
+      price: 899.99
+    },
+    {
+      id: 2,
+      name: 'Precision Mouse',
+      imageUrl: 'assets/mouse.jpg',
+      description: 'An ergonomic wireless mouse with quiet clicks and all-day comfort.',
+      price: 39.99
+    }
+  ];
 
   addToCart(product: Product): void {
     this.cartService.addToCart(product);

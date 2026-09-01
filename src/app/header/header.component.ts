@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { CartService } from '../cart.service';
-import { Product } from '../product/product.model';
+import { Store } from '@ngrx/store';
+import { cartFeature } from '../cart/CartStoreModule/cart.selectors';
 
 @Component({
     selector: 'app-header',
@@ -9,8 +9,7 @@ import { Product } from '../product/product.model';
     standalone: false
 })
 export class HeaderComponent {
+    readonly cartItems$ = this.store.select(cartFeature.selectItems);
 
-constructor(public cartService: CartService) {
-
-}
+    constructor(private store: Store) {}
 }

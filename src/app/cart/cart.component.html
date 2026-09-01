@@ -1,14 +1,21 @@
 <div class="cart-container">
   <h2>Shopping Cart</h2>
   <div class="cart-count">
-    <p>Items in Cart: <strong>{{ cartService.cart().length }}</strong></p>
+    <p>Items in Cart: <strong>{{ (cartItems$ | async)?.length ?? 0 }}</strong></p>
   </div>
-  <div *ngIf="cartService.cart().length === 0" class="empty-cart">
+  <div *ngIf="(cartItems$ | async)?.length === 0" class="empty-cart">
     <p>Your cart is empty</p>
   </div>
-  <div *ngIf="cartService.cart().length > 0" class="cart-items">
-    <div *ngFor="let item of cartService.cart()" class="cart-item">
+  <div *ngIf="(cartItems$ | async)?.length! > 0" class="cart-items">
+    <div *ngFor="let item of (cartItems$ | async)" class="cart-item">
       <p>{{ item.name }} - ${{ item.price }}</p>
+      <button type="button" (click)="removeItem(item.id!)">Remove</button>
     </div>
+    <button type="button" (click)="clearCart()">Clear cart</button>
+    <button type="button" (click)="checkout()" [disabled]="loading$ | async">
+      {{ (loading$ | async) ? 'Checking out...' : 'Checkout' }}
+    </button>
   </div>
+  <p *ngIf="error$ | async as error">{{ error }}</p>
+  <p *ngIf="orderId$ | async as orderId">Order placed: {{ orderId }}</p>
 </div>

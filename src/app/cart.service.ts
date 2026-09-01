@@ -1,18 +1,28 @@
-import { Injectable ,signal } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Product } from './product/product.model';
+import { CartActions } from './cart/CartStoreModule/cart.actions';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-private cartState = signal<Product[]>([]);
+  constructor(private store: Store) {}
 
-readonly cart =this.cartState.asReadonly();
+  addToCart(product: Product): void {
+    this.store.dispatch(CartActions.addItem({ product }));
+  }
 
-addToCart(product: Product): void {
-  this.cartState.update((cart) => [...cart, product]); 
+  removeFromCart(productId: number): void {
+    this.store.dispatch(CartActions.removeItem({ productId }));
+  }
 
+  clearCart(): void {
+    this.store.dispatch(CartActions.clearCart());
+  }
+
+  checkout(): void {
+    this.store.dispatch(CartActions.checkout());
   }
 }
- 

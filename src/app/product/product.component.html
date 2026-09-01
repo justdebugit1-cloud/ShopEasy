@@ -1,14 +1,25 @@
-<section class="product-card">
-  <div class="product-image" *ngIf="product.imageUrl">
-    <img [src]="product.imageUrl" [alt]="product.name" />
+<section class="product-catalog">
+  <div class="catalog-heading">
+    <span class="eyebrow">Featured tech</span>
+    <h2>Build your setup</h2>
+    <p>Practical essentials, ready to add to your cart.</p>
   </div>
 
-  <div class="product-info">
-    <h2>{{ product.name }}</h2>
-    <p>{{ product.description }}</p>
-    <div class="price-row">
-      <span class="price">$ {{ product.price.toFixed(2) }}</span>
-      <button type="button" (click)="addToCart(product)">Add to Cart</button>
-    </div>
+  <div class="product-grid">
+    <article class="product-card" *ngFor="let product of products">
+      <div class="product-image" [class.laptop]="product.id === 1" [class.mouse]="product.id === 2">
+        <img [src]="product.imageUrl" [alt]="product.name" />
+      </div>
+
+      <div class="product-info">
+        <span class="product-category">{{ product.id === 1 ? 'Computing' : 'Accessories' }}</span>
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.description }}</p>
+        <div class="price-row">
+          <span class="price">${{ product.price.toFixed(2) }}</span>
+          <button type="button" (click)="addToCart(product)">Add to cart</button>
+        </div>
+      </div>
+    </article>
   </div>
 </section>

@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { ProductComponent } from './product/product.component';
 import { CartComponent } from './cart/cart.component';
+import { provideEffects } from '@ngrx/effects';
+import { provideState, provideStore } from '@ngrx/store';
+import { cartFeature } from './cart/CartStoreModule/cart.selectors';
+import { CartEffects } from './cart/CartStoreModule/cart.effects';
 
 @NgModule({
   declarations: [
@@ -18,7 +22,11 @@ import { CartComponent } from './cart/cart.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    provideStore(),
+    provideState(cartFeature),
+    provideEffects(CartEffects)
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
