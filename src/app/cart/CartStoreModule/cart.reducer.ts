@@ -35,7 +35,9 @@ export const cartReducer = createReducer(
     CartActions.clearCart,
     state => ({
       ...state,
-      items: []
+      items: [],
+      error: null,
+      orderId: null
     })
   ),
 
@@ -55,6 +57,7 @@ export const cartReducer = createReducer(
       ...state,
       items: [],
       loading: false,
+      error: null,
       orderId
     })
   ),
@@ -64,7 +67,8 @@ export const cartReducer = createReducer(
     (state, { error }) => ({
       ...state,
       loading: false,
-      error
+      error,
+      orderId: null
     })
   )
 );
